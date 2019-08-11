@@ -1,6 +1,32 @@
 {% extends 'base.html' %}
 {% load humanize %}
+
+{% block header %}
+<script>
+const product_detail = (id)=>{
+    $.ajax({
+        url : "/api/product/" + id,
+        success: function(result){
+            $("#product-"+id).popover({
+                html:true,
+                content :result.name + "<br/>" +result.description
+            }).popover('show')
+        }
+    })
+}
+
+const product_leave = (id)=>{
+    $("#product-"+id).popover('hide')
+}
+
+$(document).ready(function(){
+    
+})
+</script>
+{% endblock %}
+
 {% block contents %}
+
 <div class="row mt-5">
     <div class="col-12">
         <table class="table table-light table-hover">
@@ -16,7 +42,7 @@
             {% for product in product_list %}
             <tr>
                 <th scope="row">{{product.id}}</th>
-                <th><a href="/product/{{product.id}}"> {{product.name}}<a href="#"> </th>
+                <th><a id="product-{{product.id}}" onmouseenter="product_detail({{product.id}});" onmouseleave='product_leave({{product.id}})' href="/product/{{product.id}}"> {{product.name}}<a href="#"> </th>
                 <th>{{product.price|intcomma}}</th>
                 <th>{{product.register_date|date:'Y-m-d H:i'}}</th>
             </tr>
