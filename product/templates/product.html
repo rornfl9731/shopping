@@ -22,6 +22,16 @@ const product_leave = (id)=>{
 $(document).ready(function(){
     
 })
+
+const yes = ()=>{
+    if(confirm("이동하시겠습니까?")){  // confirm()은 확인,취소창 입니다. 
+        window.location.href = "http://www.naver.com/";   // 현재 윈도우의 경로 변경하라는 거에요.
+
+      } else {
+         alert('싫으면 말고'); //위에서 배운 alert 이군요. 경고창이 또 뜹니다.
+      }
+ }
+
 </script>
 {% endblock %}
 
